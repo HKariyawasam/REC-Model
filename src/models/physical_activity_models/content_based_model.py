@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
-from sentence_transformers import SentenceTransformer
+from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.decomposition import PCA
 from src.data.dataset import readActivityDataFrame
 
@@ -14,10 +14,13 @@ def contentClustering(activityIndex):
     data = data[['types','category','title']]
 
     text_data = X
-    model = SentenceTransformer('distilbert-base-nli-mean-tokens')
-    embeddings = model.encode(text_data, show_progress_bar=True)
 
-    X = np.array(embeddings)
+    vectorizer = TfidfVectorizer()
+    X_tfidf = vectorizer.fit_transform(text_data)
+    # model = SentenceTransformer('distilbert-base-nli-mean-tokens')
+    X = np.array(X_tfidf.toarray())
+
+   
     n_comp = 5
     pca = PCA(n_components=n_comp)
     pca.fit(X)

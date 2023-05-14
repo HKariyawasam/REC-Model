@@ -1,0 +1,14 @@
+vrec/
+.vrec/
+vendor/vendor
+__pycache__/
+models/physical_activity_models/__pycache__/
+data/__pycache__/
+.__pycache__/
+vscode/
+.vscode/
+/tmp/
+tmp/
+build
+*~
+*.pyc

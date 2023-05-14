@@ -1,5 +1,4 @@
 from flask import Flask,jsonify,request
-from src.models.physical_activity_models.collabortive_based_model import collabUser
 from src.models.physical_activity_models.content_based_model import contentClustering
 from src.data.dataset import updateUserCompletionRates
 app = Flask(__name__)
@@ -10,16 +9,6 @@ app = Flask(__name__)
 def index():
     return jsonify({'name':'Hasani',
                     'status':'Server Working'})
-
-
-@app.route('/api/v1/activities/users/<int:userId>',methods=['GET'])
-def get_collaborative_preference(userId):  
-    list = collabUser(userId)
-    if(len(list) !=0):
-        return jsonify(list)
-    else:
-        return jsonify({'name':"An Error Occured",
-                    'status':404})
 
                     
 
